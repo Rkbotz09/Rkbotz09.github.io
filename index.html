@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Telegram Channel</title>
+</head>
+<body>
+  <h1>My Telegram Channel Posts</h1>
+  <ul id="post-list"></ul>
+  <script>
+    const apiToken = '6025175548:AAFYkz0odGeJ0TEA4iXTrkVz6JgmvD69vPE';
+    const chatId = '-1001327884100';
+    const apiUrl = `https://api.telegram.org/bot${apiToken}/getChatHistory?chat_id=${chatId}`;
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const posts = data.result.messages;
+        const postList = document.getElementById('post-list');
+        posts.forEach(post => {
+          const li = document.createElement('li');
+          li.innerHTML = post.text;
+          postList.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
